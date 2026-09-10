@@ -1,0 +1,38 @@
+﻿@using System.Security.Claims
+@using WriteFlow.CoreLayer.Utilities
+
+@{
+    var selected = ViewData["selected"]?.ToString().ToLower();
+}
+<aside class="card" style="padding: 1.25rem;">
+    <div style="text-align: center; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);">
+        <div style="width: 56px; height: 56px; border-radius: var(--radius-md); background: var(--dark); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.4rem; margin: 0 auto 0.5rem auto;">👑</div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <strong style="color: var(--dark); font-size: 1.1rem;">@User.GetClaimValue(ClaimTypes.Name)</strong>
+            @if (User.IsInRole("Admin"))
+            {
+                <span class="badge" style="display: block; margin-top: 0.3rem;">نقش: Admin</span>
+            }
+            else
+            {
+                <span class="badge" style="display: block; margin-top: 0.3rem;">نقش: Author</span>
+            }
+
+    <div style="margin-top: 3px;">
+        <a asp-page="/Authentication/Login" asp-page-handler="Logout" style="text-decoration: none;"><strong style="color: var(--text-muted); font-size: 0.75rem;">خروج</strong></a>
+        <a style="color: var(--text-muted); font-size: 0.75rem;"> | </a>
+        <a asp-page="/Index" style="text-decoration: none;"><strong style="color: var(--text-muted); font-size: 0.75rem;">صفحه اصلی</strong></a>
+    </div> 
+        }
+
+    </div>
+    <ul class="sidebar-menu">
+        <li><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index" class="sidebar-link @(selected == "dashboard" ? "active" : "")">🧑‍💻 داشبورد</a></li>
+        <li><a asp-area="Admin" asp-controller="User" asp-action="Index" class="sidebar-link @(selected == "user" ? "active" : "")">👤 مدیریت کاربران</a></li>
+        <li><a asp-area="Admin" asp-controller="Post" asp-action="Index" class="sidebar-link @(selected == "post" ? "active" : "")">📚 مدیریت مقالات</a></li>
+        <li><a asp-area="Admin" asp-controller="Category" asp-action="Index" class="sidebar-link @(selected=="category"?"active":"")">⚙️ مدیریت دسته بندی ها</a></li>
+    </ul>
+</aside>
+
+

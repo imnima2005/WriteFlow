@@ -1,0 +1,61 @@
+﻿@model WriteFlow.Areas.Admin.Models.User.EditUserViewModel
+
+@{
+    ViewData["Title"] = "ویرایش کاربر";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/user/user-edit.css" />
+}
+
+<div class="card user-edit-card">
+    <div class="user-edit-header">
+        <div>
+            <h2 class="user-edit-title">ویرایش کاربر</h2>
+            <p class="user-edit-subtitle">اطلاعات مورد نیاز را برای ویرایش کاربر وارد کنید</p>
+        </div>
+        <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-outline user-edit-back-btn">
+            ← بازگشت
+        </a>
+    </div>
+
+    <form method="post" asp-area="Admin" asp-controller="User" asp-action="Edit">
+        <input type="hidden" asp-for="UserId" />
+
+        <div class="form-group user-edit-form-group">
+            <label asp-for="UserName" class="form-label user-edit-label">
+                نام کاربری <span class="user-edit-required">*</span>
+            </label>
+            <input asp-for="UserName" type="text" class="form-control" placeholder="نام کاربری را وارد کنید ..." required />
+            <span asp-validation-for="UserName"></span>
+        </div>
+
+        <div class="user-edit-grid">
+            <div class="form-group">
+                <label asp-for="FullName" class="form-label user-edit-label">
+                    نام و نام خانوادگی <span class="user-edit-required">*</span>
+                </label>
+                <input asp-for="FullName" type="text" class="form-control user-edit-input-rtl" placeholder="نیما رضائی" required />
+                <span asp-validation-for="FullName"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Role" class="form-label user-edit-label">
+                    نقش <span class="user-edit-required">*</span>
+                </label>
+                <select asp-for="Role" class="form-control user-edit-select" required>
+                    <option value="" disabled selected hidden>انتخاب کنید</option>
+                    <option value="Admin">کاربر ادمین</option>
+                    <option value="User">کاربر عادی</option>
+                    <option value="Author">کاربر نویسنده</option>
+                </select>
+                <span asp-validation-for="Role"></span>
+            </div>
+        </div>
+
+        <div class="user-edit-actions">
+            <button type="submit" class="btn btn-primary user-edit-btn-submit">ویرایش</button>
+            <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-outline user-edit-btn-cancel">انصراف</a>
+        </div>
+    </form>
+</div>

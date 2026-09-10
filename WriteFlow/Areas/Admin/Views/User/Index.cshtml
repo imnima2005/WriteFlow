@@ -1,0 +1,64 @@
+﻿@model WriteFlow.CoreLayer.DTOs.Users.UserFilterDto
+@using WriteFlow.CoreLayer.Utilities
+@{
+    ViewData["Title"] = "کاربران";
+    ViewData["selected"] = "user";
+    var count = 1;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/user/user-index.css" />
+}
+
+<div class="card user-index-card">
+    <h3 class="user-index-title">کاربران</h3>
+
+    <form method="get" class="user-index-filter-form">
+        <div class="user-index-input-wrapper">
+            <input type="text" name="userName" value="@Model.FilterParams.UserName" class="form-control user-index-search-input" placeholder="جستجو بر اساس نام کاربری..." />
+        </div>
+
+        <button type="submit" class="btn btn-primary user-index-btn">
+            🔍 جستجو
+        </button>
+
+        <a asp-area="Admin" asp-controller="User" asp-action="Create" class="btn btn-primary user-index-btn">
+            ➕ افزودن
+        </a>
+    </form>
+
+    <div class="user-index-table-container">
+        <table class="user-index-table">
+            <thead>
+                <tr class="user-index-thead-row">
+                    <th class="user-index-th">#</th>
+                    <th class="user-index-th">تصویر</th>
+                    <th class="user-index-th">نام کاربری</th>
+                    <th class="user-index-th">نام و نام خانوادگی</th>
+                    <th class="user-index-th">نقش</th>
+                    <th class="user-index-th">عملیات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Users)
+                {
+                    <tr class="user-index-tbody-row">
+                        <td class="user-index-td"><span class="badge">@(count++)</span></td>
+                        <td class="user-index-td">
+                            <img src="#" class="user-index-avatar" alt="@item.FullName" />
+                        </td>
+                        <td class="user-index-td user-index-username">@item.UserName</td>
+                        <td class="user-index-td user-index-fullname">@item.FullName</td>
+                        <td class="user-index-td user-index-role">@item.Role</td>
+                        <td class="user-index-td">
+                            <a asp-area="Admin" asp-controller="User" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline user-index-action-btn">ویرایش</a>
+                            <a asp-area="Admin" asp-controller="User" asp-action="Delete" asp-route-userId="@item.Id" class="btn btn-danger user-index-action-btn">حذف</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <partial name="_Pagination" model="Model" />
+</div>

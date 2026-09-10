@@ -1,0 +1,73 @@
+﻿@using System.Security.Claims
+@using WriteFlow.CoreLayer.Utilities
+@using WriteFlow.CoreLayer.Services.MainPage
+@inject IMainPageServices MainPageServices
+
+@{
+    var stats = MainPageServices.GetSiteStats();
+    ViewData["Title"] = "پنل ادمین";
+    ViewData["selected"] = "dashboard";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+}
+
+
+<div class="card">
+    <div class="dashboard-grid-wrapper">
+
+        <div class="dash-top-row">
+            <div class="dash-box dash-welcome-box">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <strong style="color: var(--dark); font-size: 1.1rem;"></strong>
+                    <h2 class="welcome-title">سلام @User.GetClaimValue(ClaimTypes.Name) خوش اومدی !</h2>
+                    <span class="welcome-date">امروز @DateTime.UtcNow.ToPersianDate("ds dd ms Y")</span>
+                }
+
+            </div>
+
+            <div class="dash-box dash-stat-item">
+                <span class="stat-text">تعداد کاربران: <strong>@stats.UserCount</strong></span>
+            </div>
+
+            <div class="dash-box dash-stat-item">
+                <span class="stat-text">تعداد مقالات: <strong>@stats.PostCount</strong></span>
+            </div>
+
+            <div class="dash-box dash-stat-item">
+                <span class="stat-text">تعداد دسته بندی ها: <strong>@stats.CategoryCount</strong></span>
+            </div>
+        </div>
+
+        <div class="dash-bottom-row">
+
+            <div class="dash-box dash-col-card">
+                <h3 class="col-card-title">مدیریت کاربران</h3>
+                <div class="col-card-actions">
+                    <a asp-area="Admin" asp-controller="User" asp-action="Create" class="dash-btn dash-btn--primary">افزودن کاربر جدید</a>
+                    <a asp-area="Admin" asp-controller="User" asp-action="Index" class="dash-btn dash-btn--outline">نمایش لیست کاربران</a>
+                </div>
+            </div>
+
+            <div class="dash-box dash-col-card">
+                <h3 class="col-card-title">مدیریت مقالات</h3>
+                <div class="col-card-actions">
+                    <a asp-area="Admin" asp-controller="Post" asp-action="Create" class="dash-btn dash-btn--primary">افزودن مقاله جدید</a>
+                    <a asp-area="Admin" asp-controller="Post" asp-action="Index" class="dash-btn dash-btn--outline">نمایش لیست مقالات</a>
+                </div>
+            </div>
+
+            <div class="dash-box dash-col-card">
+                <h3 class="col-card-title">مدیریت دسته بندی ها</h3>
+                <div class="col-card-actions">
+                    <a asp-area="Admin" asp-controller="Category" asp-action="Add" class="dash-btn dash-btn--primary">افزودن دسته بندی</a>
+                    <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="dash-btn dash-btn--outline">نمایش لیست دسته بندی ها</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

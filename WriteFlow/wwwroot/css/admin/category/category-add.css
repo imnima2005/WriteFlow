@@ -1,0 +1,69 @@
+﻿.create-category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+}
+
+.create-category-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin: 0;
+}
+
+.create-category-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+.create-category-back-btn {
+    font-size: 0.825rem;
+    padding: 0.45rem 0.85rem;
+}
+
+
+.create-category-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.create-category-required {
+    color: var(--primary);
+}
+
+.create-category-slug-input {
+    direction: ltr;
+    text-align: left;
+}
+
+.create-category-field-spacing {
+    margin-top: 1rem;
+}
+
+.create-category-hint {
+    font-size: 0.775rem;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 0.35rem;
+}
+
+.create-category-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.25rem;
+}
+
+.create-category-submit-btn {
+    padding: 0.6rem 1.5rem;
+}
+
+.create-category-cancel-btn {
+    padding: 0.6rem 1.25rem;
+}

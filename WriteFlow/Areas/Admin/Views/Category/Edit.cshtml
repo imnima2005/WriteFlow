@@ -1,0 +1,51 @@
+﻿@model WriteFlow.Areas.Admin.Models.Category.EditCategoryViewModel
+@{
+    ViewData["Title"] = "افزودن دسته بندی";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/category/category-add.css" />
+}
+
+<div class="card">
+    <div class="create-category-header">
+        <div>
+            <h3 class="create-category-title">ویرایش دسته‌بندی</h3>
+            <p class="create-category-subtitle">اطلاعات دسته‌بندی و تنظیمات سئو (SEO) را وارد کنید</p>
+        </div>
+        <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="btn btn-outline create-category-back-btn">
+            ← بازگشت به لیست
+        </a>
+    </div>
+
+    <form method="post">
+        <div class="create-category-grid">
+            <div class="form-group">
+                <label class="form-label">عنوان دسته‌بندی (Title) <span class="create-category-required">*</span></label>
+                <input asp-for="Title" type="text" class="form-control" placeholder="مثال: آموزش ASP.NET Core" required />
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">اسلاگ (Slug / URL) <span class="create-category-required">*</span></label>
+                <input asp-for="Slug" type="text" class="form-control create-category-slug-input" placeholder="مثال: aspnet-core-tutorials" required />
+                <span asp-validation-for="Slug"></span>
+            </div>
+        </div>
+
+        <div class="form-group create-category-field-spacing">
+            <label class="form-label">متاتگ‌ها / کلمات کلیدی (Meta Keywords)</label>
+            <input asp-for="MetaTag" type="text" class="form-control" placeholder="کلمات را با کاما (,) جدا کنید. مثال: aspnet, csharp, web_development" />
+            <small class="create-category-hint">برای بهبود سئو و موتورهای جستجو</small>
+        </div>
+
+        <div class="form-group create-category-field-spacing">
+            <label class="form-label">توضیحات متالوگ (Meta Description)</label>
+            <textarea asp-for="MetaDescription" class="form-control" rows="3" placeholder="توضیح کوتاهی درباره این دسته‌بندی برای موتورهای جستجو (حداکثر ۱۶۰ کاراکتر)..."></textarea>
+        </div>
+
+        <div class="create-category-actions">
+            <button type="submit" class="btn btn-primary create-category-submit-btn">ویرایش دسته‌بندی</button>
+            <a asp-area="Admin" asp-controller="Category" asp-action="Index" class="btn btn-outline create-category-cancel-btn">انصراف</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,79 @@
+﻿@model WriteFlow.CoreLayer.DTOs.Posts.PostFilterDto
+@using WriteFlow.CoreLayer.Utilities
+@{
+    ViewData["Title"] = "مقالات";
+    ViewData["selected"] = "post";
+    var count = 1;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/post/post-index.css" />
+}
+
+<div class="card post-index-card">
+    <h3 class="post-index-title">مقالات</h3>
+
+    <form method="get" class="post-index-filter-form">
+        <div class="post-index-input-wrapper">
+            <input type="text" name="title" value="@Model.FilterParams.Title" class="form-control post-index-search-input" placeholder="جستجو بر اساس عنوان..." />
+        </div>
+
+        <div class="post-index-input-wrapper">
+            <input type="text" name="categorySlug" value="@Model.FilterParams.CategorySlug" class="form-control post-index-slug-input" placeholder="جستجو بر اساس اسلاگ..." />
+        </div>
+
+        <button type="submit" class="btn btn-primary post-index-btn">
+            🔍 جستجو
+        </button>
+
+        <a asp-area="Admin" asp-controller="Post" asp-action="Create" class="btn btn-primary post-index-btn">
+            ➕ افزودن
+        </a>
+    </form>
+
+    <div class="post-index-table-container">
+        <table class="post-index-table">
+            <thead>
+                <tr class="post-index-thead-row">
+                    <th class="post-index-th">#</th>
+                    <th class="post-index-th">تصویر</th>
+                    <th class="post-index-th">عنوان</th>
+                    <th class="post-index-th">دسته بندی</th>
+                    <th class="post-index-th">عملیات</th>
+                    <th class="post-index-th">ویژه</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Posts)
+                {
+                    <tr class="post-index-tbody-row">
+                        <td class="post-index-td">
+                            <span class="badge">@(count++)</span>
+                        </td>
+                        <td class="post-index-td">
+                            <img src="@Directories.GetPostImage(item.ImageName)" class="post-index-img" alt="@item.Title" />
+                        </td>
+                        <td class="post-index-td post-index-post-title">@item.Title</td>
+                        <td class="post-index-td post-index-category-title">@item.Category.Title</td>
+                        <td class="post-index-td">
+                            <a asp-area="Admin" asp-controller="Post" asp-action="Edit" asp-route-id="@item.PostId" class="btn btn-outline post-index-action-btn">ویرایش</a>
+                            <a asp-area="Admin" asp-controller="Post" asp-action="Delete" asp-route-id="@item.PostId" class="btn btn-danger post-index-action-btn">حذف</a>
+                        </td>
+                        <td class="post-index-td">
+                            @if (item.IsSpecial)
+                            {
+                                <span title="ویژه">🟢</span>
+                            }
+                            else
+                            {
+                                <span title="عادی">🔴</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <partial name="_Pagination" model="Model" />
+</div>

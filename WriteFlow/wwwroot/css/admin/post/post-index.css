@@ -1,0 +1,93 @@
+﻿.post-index-card {
+    padding: 1.5rem;
+}
+
+.post-index-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 1.25rem;
+}
+
+.post-index-filter-form {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.post-index-input-wrapper {
+    flex: 1;
+    min-width: 180px;
+}
+
+.post-index-search-input {
+    width: 100%;
+}
+
+.post-index-slug-input {
+    width: 100%;
+    direction: ltr;
+}
+
+.post-index-btn {
+    padding: 0.5rem 1.25rem;
+    white-space: nowrap;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-index-table-container {
+    overflow-x: auto;
+}
+
+.post-index-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.post-index-thead-row {
+    border-bottom: 2px solid var(--border);
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.post-index-th {
+    padding: 0.75rem;
+}
+
+.post-index-tbody-row {
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+.post-index-td {
+    padding: 0.85rem;
+    vertical-align: middle;
+}
+
+.post-index-img {
+    width: 60px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+
+.post-index-post-title {
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.post-index-category-title {
+    color: var(--text-muted);
+}
+
+.post-index-action-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.775rem;
+}

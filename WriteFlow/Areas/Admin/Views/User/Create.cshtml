@@ -1,0 +1,77 @@
+﻿@model WriteFlow.Areas.Admin.Models.User.CreateUserViewModel
+
+@{
+    ViewData["Title"] = "افزودن کاربر جدید";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/user/user-create.css" />
+}
+
+<div class="card user-create-card">
+    <div class="user-create-header">
+        <div>
+            <h2 class="user-create-title">ایجاد کاربر جدید</h2>
+            <p class="user-create-subtitle">اطلاعات مورد نیاز برای ایجاد کاربر جدید را وارد کنید</p>
+        </div>
+        <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-outline user-create-back-btn">
+            ← بازگشت
+        </a>
+    </div>
+
+    <form method="post" asp-area="Admin" asp-controller="User" asp-action="Create">
+
+        <div class="form-group user-create-form-group">
+            <label asp-for="UserName" class="form-label user-create-label">
+                نام کاربری <span class="user-create-required">*</span>
+            </label>
+            <input asp-for="UserName" type="text" class="form-control" placeholder="نام کاربری را وارد کنید ..." required />
+            <span asp-validation-for="UserName"></span>
+        </div>
+
+        <div class="user-create-grid">
+            <div class="form-group">
+                <label asp-for="FullName" class="form-label user-create-label">
+                    نام و نام خانوادگی <span class="user-create-required">*</span>
+                </label>
+                <input asp-for="FullName" type="text" class="form-control user-create-input-rtl" placeholder="نیما رضائی" required />
+                <span asp-validation-for="FullName"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="form-label user-create-label">
+                    رمزعبور <span class="user-create-required">*</span>
+                </label>
+                <input asp-for="Password" type="password" class="form-control user-create-input-ltr" placeholder="***************" required />
+                <span asp-validation-for="Password"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="form-label user-create-label">
+                    تکرار رمزعبور <span class="user-create-required">*</span>
+                </label>
+                <input asp-for="ConfirmPassword" type="password" class="form-control user-create-input-ltr" placeholder="***************" required />
+                <span asp-validation-for="ConfirmPassword"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Role" class="form-label user-create-label">
+                    نقش <span class="user-create-required">*</span>
+                </label>
+                <select asp-for="Role" class="form-control user-create-select" required>
+                    <option value="" disabled selected hidden>انتخاب کنید</option>
+                    <option value="Admin">کاربر ادمین</option>
+                    <option value="User">کاربر عادی</option>
+                    <option value="Author">کاربر نویسنده</option>
+                </select>
+                <span asp-validation-for="Role"></span>
+            </div>
+        </div>
+
+        <div class="user-create-actions">
+            <button type="submit" class="btn btn-primary user-create-btn-submit">افزودن</button>
+            <a asp-area="Admin" asp-controller="User" asp-action="Index" class="btn btn-outline user-create-btn-cancel">انصراف</a>
+        </div>
+
+    </form>
+</div>

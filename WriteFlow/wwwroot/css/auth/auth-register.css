@@ -1,0 +1,56 @@
+﻿.auth-register-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-register-logo {
+    margin: 0 auto 1rem auto;
+    width: 48px;
+    height: 48px;
+    font-size: 1.3rem;
+}
+
+.auth-register-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--dark);
+}
+
+.auth-register-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+}
+
+.auth-register-password-label {
+    margin-bottom: 0.45rem;
+}
+
+.auth-register-submit-btn {
+    margin-top: 1rem;
+}
+
+.auth-register-footer {
+    text-align: center;
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.auth-register-login-link {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.auth-register-back-wrapper {
+    margin-top: 0.8rem;
+}
+
+.auth-register-back-link {
+    font-size: 0.825rem;
+    color: var(--text-muted);
+    text-decoration: none;
+}

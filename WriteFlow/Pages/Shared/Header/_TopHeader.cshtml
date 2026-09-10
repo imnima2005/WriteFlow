@@ -1,0 +1,78 @@
+﻿@model List<WriteFlow.CoreLayer.DTOs.Categories.CategoryDto>
+@using System.Security.Claims
+@using WriteFlow.CoreLayer.Utilities
+
+<header style="background: var(--surface); border-bottom: 1px solid var(--border); padding: 0.85rem 1.5rem;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+
+        <!-- لوگو و منوی دسته‌بندی‌ها -->
+        <div style="display: flex; align-items: center; gap: 1.5rem;">
+            <a href="/" class="logo-brand">
+                <img src="~/images/Static/WriteFlowIcon.png" alt="Profile" class="logo-img" />
+                روان نویس
+            </a>
+
+            <!-- منوی دسته‌بندی‌ها -->
+            <!-- منوی دسته‌بندی‌ها در هدر -->
+            <nav style="display: flex; gap: 1.25rem; font-size: 0.875rem; align-items: center;">
+                @foreach (var category in Model.Where(p => p.ParentId == null))
+                {
+                    var hasChild = Model.Any(p => p.ParentId == category.Id);
+                    if (hasChild)
+                    {
+                        <div class="dropdown" style="position: relative; display: inline-block;">
+                            <a href="/search?categorySlug=@category.Slug" class="dropdown-toggle" style="color: var(--dark); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 0.3rem;">
+                                @category.Title
+                                <span style="font-size: 0.65rem;">▼</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                @foreach (var child in Model.Where(p => p.ParentId == category.Id))
+                                {
+                                    <a href="/search?categorySlug=@child.Slug">@child.Title</a>
+                                }
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <a href="/search?categorySlug=@category.Slug" style="color: var(--dark); text-decoration: none; font-weight: 600;">@category.Title</a>
+                    }
+                }
+            </nav>
+        </div>
+
+        <!-- سرچ بار و پروفایل کاربر -->
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <!-- سرچ بار هدر -->
+            <form action="Search" method="get" style="display: flex; align-items: center; background: var(--bg-main); border: 1px solid var(--border); border-radius: var(--radius-sm, 6px); padding: 0.25rem 0.5rem;">
+                <input type="text" name="q" placeholder="جستجو در مقالات..." style="border: none; background: transparent; outline: none; padding: 0.25rem 0.5rem; font-size: 0.825rem; color: var(--dark);" />
+                <button type="submit" style="border: none; background: transparent; cursor: pointer; font-size: 0.85rem;">🔍</button>
+            </form>
+
+            <!-- بخش پروفایل کاربر -->
+            <div style="display: flex; align-items: center; gap: 0.5rem; border-right: 1px solid var(--border); padding-right: 1rem;">
+                <img src="~/images/Static/UserProfile.png" alt="Profile" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1px solid var(--primary);" />
+                <div style="display: flex; flex-direction: column; font-size: 0.775rem;">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a href="/admin/dashboard" style="text-decoration: none;"><strong style="color: var(--dark);">@User.GetClaimValue(ClaimTypes.Name)</strong></a>
+                        }
+                        else
+                        {
+                            <strong style="color: var(--dark);">@User.GetClaimValue(ClaimTypes.Name)</strong>
+                        }
+                        <a asp-page="/Authentication/Login" asp-page-handler="Logout" style="color: var(--text-muted); text-decoration: none;">خروج</a>
+                    }
+                    else
+                    {
+                        <a asp-page="/Authentication/Login" style="color: var(--text-muted); text-decoration: none;"><strong style="color: var(--dark);">ورود | ثبت نام</strong></a>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</header>

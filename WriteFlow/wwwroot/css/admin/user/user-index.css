@@ -1,0 +1,96 @@
+﻿.user-index-card {
+    padding: 1.5rem;
+}
+
+.user-index-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 1.25rem;
+}
+
+.user-index-filter-form {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.user-index-input-wrapper {
+    flex: 1;
+    min-width: 180px;
+}
+
+.user-index-search-input {
+    width: 100%;
+}
+
+.user-index-btn {
+    padding: 0.5rem 1.25rem;
+    white-space: nowrap;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-index-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.user-index-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.user-index-thead-row {
+    border-bottom: 2px solid var(--border);
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.user-index-th {
+    padding: 0.75rem;
+    font-weight: 700;
+}
+
+.user-index-tbody-row {
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+.user-index-td {
+    padding: 0.85rem;
+    vertical-align: middle;
+}
+
+.user-index-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    vertical-align: middle;
+}
+
+.user-index-username {
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.user-index-fullname {
+    color: var(--text-muted);
+}
+
+.user-index-role {
+    color: var(--text-muted);
+}
+
+.user-index-action-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.775rem;
+    text-decoration: none;
+}

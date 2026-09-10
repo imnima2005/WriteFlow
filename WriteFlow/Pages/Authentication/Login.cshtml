@@ -1,0 +1,42 @@
+﻿@page
+@model WriteFlow.Pages.Authentication.LoginModel
+@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = "ورود به حساب";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/auth/auth-login.css" />
+}
+
+<div class="auth-login-header">
+    <div class="brand-logo-badge auth-login-logo">W</div>
+    <h1 class="auth-login-title">ورود به حساب کاربری</h1>
+    <p class="auth-login-subtitle">لطفاً ایمیل و رمز عبور خود را وارد کنید</p>
+</div>
+
+<form method="post">
+    <div class="form-group">
+        <label class="form-label" asp-for="UserName">نام کاربری</label>
+        <input type="email" class="form-control" placeholder="name@example.com" asp-for="UserName" />
+        <span asp-validation-for="UserName"></span>
+    </div>
+
+    <div class="form-group">
+        <div class="auth-login-password-header">
+            <label class="form-label auth-login-password-label" asp-for="Password">رمز عبور</label>
+            <a href="#" class="auth-login-forgot-link">فراموشی رمز؟</a>
+        </div>
+        <input type="password" class="form-control" placeholder="••••••••" asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block auth-login-submit-btn">ورود به حساب</button>
+</form>
+
+<div class="auth-login-footer">
+    حساب کاربری ندارید؟ <a asp-page="Register" class="auth-login-register-link">ثبت‌نام کنید</a>
+    <div class="auth-login-back-wrapper">
+        <a href="/" class="auth-login-back-link">← بازگشت به صفحه اصلی</a>
+    </div>
+</div>

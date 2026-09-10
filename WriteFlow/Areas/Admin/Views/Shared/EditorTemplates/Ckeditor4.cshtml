@@ -1,0 +1,9 @@
+﻿@model string
+
+
+<label asp-for="@Model" class="form-label" style="font-weight: 700; font-size: 0.9rem; margin-bottom: 0.4rem; display: block; color: var(--dark);">
+متن بدنه مقاله
+<span style="color: var(--primary);">*</span>
+</label>
+<textarea asp-for="@Model" id="ckEditor4" class="form-control" rows="12" placeholder="متن کامل مقاله خود را در این بخش بنویسید..." required style="line-height: 1.7;"></textarea>
+<span asp-validation-for="@Model" class="text-danger"></span>

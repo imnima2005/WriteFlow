@@ -1,0 +1,131 @@
+﻿.post-edit-card {
+    margin: 1.5rem;
+    padding: 1.5rem;
+}
+
+.post-edit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+}
+
+.post-edit-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin: 0;
+}
+
+.post-edit-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+.post-edit-back-btn {
+    font-size: 0.825rem;
+    padding: 0.4rem 0.85rem;
+}
+
+.post-edit-grid-2col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.post-edit-grid-3col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.post-edit-grid-media {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.post-edit-form-group {
+    margin-bottom: 0;
+}
+
+.post-edit-label {
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-bottom: 0.4rem;
+    display: block;
+    color: var(--dark);
+}
+
+.post-edit-required {
+    color: var(--primary);
+}
+
+.post-edit-slug-input {
+    direction: ltr;
+    text-align: left;
+}
+
+.post-edit-select {
+    background: var(--surface);
+}
+
+.post-edit-file-input {
+    padding: 0.4rem;
+}
+
+.post-edit-hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 0.3rem;
+}
+
+.post-edit-checkbox-group {
+    padding-top: 0.5rem;
+}
+
+.post-edit-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.post-edit-checkbox {
+    width: 1.2rem;
+    height: 1.2rem;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+.post-edit-checkbox-text {
+    font-size: 0.85rem;
+    color: var(--text-main);
+}
+
+.post-edit-editor-container {
+    margin-bottom: 1.5rem;
+}
+
+.post-edit-actions {
+    display: flex;
+    gap: 0.75rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.25rem;
+}
+
+.post-edit-submit-btn {
+    padding: 0.55rem 1.5rem;
+}
+
+.post-edit-cancel-btn {
+    padding: 0.55rem 1.25rem;
+}

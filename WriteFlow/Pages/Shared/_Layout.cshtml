@@ -1,0 +1,27 @@
+﻿@using WriteFlow.CoreLayer.Services.Categories
+@inject ICategoryServices _categoryServices
+@{ 
+    var categories = _categoryServices.GetAllcategory();
+}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - وبلاگ من</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <partial name="Header/_TopHeader" model="categories"/>
+
+    <main class="main-container">
+        @RenderBody()
+    </main>
+
+    <partial name="Footer/_Footer" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="~/js/popularPost.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

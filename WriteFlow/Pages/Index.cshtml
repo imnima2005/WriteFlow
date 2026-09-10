@@ -1,0 +1,84 @@
+﻿@page "{handler?}"
+@model WriteFlow.Pages.IndexModel
+@using WriteFlow.CoreLayer.Utilities
+@{
+    ViewData["Title"] = "صفحه اصلی";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/home-index.css" />
+}
+
+<div class="home-layout">
+    <main class="home-main">
+        @if (Model.MainPageData.SpecialPosts.Any())
+        {
+            <h3 class="home-section-title">مقالات ویژه</h3>
+            <section class="special-posts">
+                @{
+                    var bigPost = Model.MainPageData.SpecialPosts.First();
+                    var smallPosts = Model.MainPageData.SpecialPosts.Where(r => r.PostId != bigPost.PostId);
+                }
+
+                <a asp-page="Article" asp-route-slug="@bigPost.Slug" class="spcard" aria-label="@bigPost.Title">
+                    <img class="spcard__img" src="@Directories.GetPostImage(bigPost.ImageName)" alt="@bigPost.Title" loading="lazy" />
+                    <div class="spcard__content">
+                        <span class="badge home-badge-featured">ویژه</span>
+                        <h2 class="spcard__title">@bigPost.Title</h2>
+                        <p class="spcard__text">@bigPost.ShortDescription</p>
+                    </div>
+                </a>
+
+                @foreach (var item in smallPosts)
+                {
+                    <a asp-page="Article" asp-route-slug="@item.Slug" class="spcard spcard--sm" aria-label="@item.Title">
+                        <img class="spcard__img" src="@Directories.GetPostImage(item.ImageName)" alt="@item.Title" loading="lazy" />
+                        <div class="spcard__content">
+                            <span class="badge home-badge-hot">داغ</span>
+                            <h3 class="spcard__title">@item.Title</h3>
+                        </div>
+                    </a>
+                }
+            </section>
+        }
+
+        <section>
+            <h3 class="home-section-title home-latest-title">آخرین مقالات</h3>
+            <div class="home-posts-grid">
+                <partial name="Shared/_LatestPosts" model="Model.MainPageData.LastPosts" />
+            </div>
+        </section>
+    </main>
+
+    <aside class="home-sidebar">
+        <div class="card home-sidebar-card">
+            <h3 class="home-sidebar-title">
+                📂 دسته‌بندی‌ها
+            </h3>
+            <ul class="home-categories-list">
+                @foreach (var category in Model.MainPageData.Categories)
+                {
+                    <li class="home-category-item">
+                        <a asp-page="Search" asp-route-categorySlug="@category.Slug" class="home-category-link">@category.Title</a>
+                        <span class="badge home-category-badge">@category.PostChild</span>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="card home-sidebar-card" id="popular_posts"></div>
+    </aside>
+</div>
+
+@section Scripts {
+    <script>
+        function getLatestPostBySlug(slug) {
+            $.ajax({
+                url: "/index/LatestPosts?categorySlug=" + slug,
+                type: "get",
+            }).done(function (data) {
+                $("#latestPost").html(data);
+            });
+        }
+    </script>
+}

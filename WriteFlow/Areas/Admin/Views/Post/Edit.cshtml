@@ -1,0 +1,134 @@
+﻿@model WriteFlow.Areas.Admin.Models.Post.EditPostViewModel
+@using WriteFlow.CoreLayer.Services.Categories;
+@inject ICategoryServices _categoryServices;
+@{
+    ViewData["Title"] = "ویرایش مقاله";
+    ViewData["selected"] = "category";
+    var categories = _categoryServices.GetAllcategory();
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/post/post-edit.css" />
+}
+
+<div class="card post-edit-card">
+    <div class="post-edit-header">
+        <div>
+            <h2 class="post-edit-title">ویرایش مقاله</h2>
+            <p class="post-edit-subtitle">اطلاعات مقاله را ویرایش و ذخیره کنید</p>
+        </div>
+        <a asp-area="Admin" asp-controller="Post" asp-action="Index" class="btn btn-outline post-edit-back-btn">
+            ← بازگشت
+        </a>
+    </div>
+
+    <form method="post" asp-area="Admin" asp-controller="Post" asp-action="Edit" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="post-edit-grid-2col">
+            <div class="form-group post-edit-form-group">
+                <label class="form-label post-edit-label">
+                    عنوان مقاله <span class="post-edit-required">*</span>
+                </label>
+                <input asp-for="Title" type="text" class="form-control" placeholder="عنوان مقاله را وارد کنید..." required />
+            </div>
+
+            <div class="form-group post-edit-form-group">
+                <label class="form-label post-edit-label">
+                    توضیحات کوتاه <span class="post-edit-required">*</span>
+                </label>
+                <input asp-for="ShortDescription" type="text" class="form-control" placeholder="توضیحات کوتاه را وارد کنید..." required />
+            </div>
+        </div>
+
+        <div class="post-edit-grid-3col">
+            <div class="form-group post-edit-form-group">
+                <label class="form-label post-edit-label">
+                    اسلاگ (Slug / URL) <span class="post-edit-required">*</span>
+                </label>
+                <input asp-for="Slug" type="text" class="form-control post-edit-slug-input" placeholder="example-article-slug" required />
+                <small class="post-edit-hint">عنوان مقاله در آدرس مرورگر</small>
+            </div>
+
+            <div class="form-group post-edit-form-group">
+                <label asp-for="CategoryId" class="form-label post-edit-label">
+                    موضوع <span class="post-edit-required">*</span>
+                </label>
+                <select asp-for="CategoryId" class="form-control post-edit-select" required>
+                    <option value='null' disabled selected hidden>انتخاب کنید</option>
+                    @foreach (var item in categories.Where(c => c.ParentId == null))
+                    {
+                        <option value="@item.Id">@item.Title</option>
+                    }
+                </select>
+                <span asp-validation-for="CategoryId"></span>
+            </div>
+
+            <div class="form-group post-edit-form-group">
+                <label asp-for="SubCategoryId" class="form-label post-edit-label">
+                    دسته بندی <span class="post-edit-required">*</span>
+                </label>
+                <select asp-for="SubCategoryId" class="form-control post-edit-select">
+                    <option value="">ابتدا موضوع را انتخاب کنید</option>
+                </select>
+                <span asp-validation-for="SubCategoryId"></span>
+            </div>
+        </div>
+
+        <div class="post-edit-grid-media">
+            <div class="form-group post-edit-form-group">
+                <label class="form-label post-edit-label">
+                    تصویر شاخص مقاله <span class="post-edit-required">*</span>
+                </label>
+                <input asp-for="ImageFile" type="file" accept="image/*" class="form-control post-edit-file-input" />
+                <small class="post-edit-hint">فرمت‌های مجاز: JPG, PNG, WEBP</small>
+            </div>
+
+            <div class="form-group post-edit-form-group post-edit-checkbox-group">
+                <label class="form-label post-edit-label">
+                    پست ویژه
+                </label>
+                <label class="post-edit-checkbox-label">
+                    <input asp-for="IsSpecial" type="checkbox" class="post-edit-checkbox" />
+                    <span class="post-edit-checkbox-text">نمایش در بخش ویژه</span>
+                </label>
+                <span asp-validation-for="IsSpecial"></span>
+            </div>
+        </div>
+
+        <div class="form-group post-edit-editor-container">
+            @Html.EditorFor(m => m.Description, "Ckeditor4")
+        </div>
+
+        <div class="post-edit-actions">
+            <button type="submit" class="btn btn-primary post-edit-submit-btn">ویرایش مقاله</button>
+            <a asp-area="Admin" asp-controller="Post" asp-action="Index" class="btn btn-outline post-edit-cancel-btn">انصراف</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <script>
+        $("#CategoryId").change(function () {
+            var categoryId = $(this).val();
+            if (!categoryId || categoryId === "null" || categoryId === "") {
+                $("#SubCategoryId").html("<option value=''>ابتدا موضوع را انتخاب کنید</option>");
+                return;
+            }
+            $.ajax({
+                url: "/admin/category/GetChildCategories?parentId=" + categoryId,
+                type: "get"
+            }).done(function (data) {
+                if (data && data.length > 0) {
+                    $("#SubCategoryId").html("<option value=''>انتخاب کنید (اختیاری)</option>");
+                    for (var i in data) {
+                        var category = data[i];
+                        $("#SubCategoryId").append(`<option value='${category.id}'>${category.title}</option>`);
+                    }
+                } else {
+                    $("#SubCategoryId").html("<option value=''>بدون زیرگروه</option>");
+                }
+            })
+        })
+    </script>
+}

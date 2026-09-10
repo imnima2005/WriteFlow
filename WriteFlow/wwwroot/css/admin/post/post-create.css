@@ -1,0 +1,131 @@
+﻿.post-create-card {
+    margin: 1.5rem;
+    padding: 1.5rem;
+}
+
+.post-create-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+}
+
+.post-create-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin: 0;
+}
+
+.post-create-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+}
+
+.post-create-back-btn {
+    font-size: 0.825rem;
+    padding: 0.4rem 0.85rem;
+}
+
+.post-create-grid-2col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.post-create-grid-3col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.post-create-grid-media {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.post-create-form-group {
+    margin-bottom: 0;
+}
+
+.post-create-label {
+    font-weight: 700;
+    font-size: 0.875rem;
+    margin-bottom: 0.4rem;
+    display: block;
+    color: var(--dark);
+}
+
+.post-create-required {
+    color: var(--primary);
+}
+
+.post-create-slug-input {
+    direction: ltr;
+    text-align: left;
+}
+
+.post-create-select {
+    background: var(--surface);
+}
+
+.post-create-file-input {
+    padding: 0.4rem;
+}
+
+.post-create-hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: block;
+    margin-top: 0.3rem;
+}
+
+.post-create-checkbox-group {
+    padding-top: 0.5rem;
+}
+
+.post-create-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.post-create-checkbox {
+    width: 1.2rem;
+    height: 1.2rem;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+.post-create-checkbox-text {
+    font-size: 0.85rem;
+    color: var(--text-main);
+}
+
+.post-create-editor-container {
+    margin-bottom: 1.5rem;
+}
+
+.post-create-actions {
+    display: flex;
+    gap: 0.75rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.25rem;
+}
+
+.post-create-submit-btn {
+    padding: 0.55rem 1.5rem;
+}
+
+.post-create-cancel-btn {
+    padding: 0.55rem 1.25rem;
+}

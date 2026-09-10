@@ -1,0 +1,73 @@
+﻿@model WriteFlow.CoreLayer.DTOs.Categories.CategoryFilterDto
+@{
+    ViewData["Title"] = "دسته بندی ها";
+    ViewData["selected"] = "category";
+    var count = 1;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin/category/category-index.css" />
+}
+
+<div class="card">
+    <h3 class="category-index-title">دسته بندی ها</h3>
+
+    <form method="get" class="category-index-filter-form">
+        <div class="category-index-input-wrapper">
+            <input type="text" name="title" value="@Model.FilterParams.Title" class="form-control category-index-input" placeholder="جستجو بر اساس عنوان..." />
+        </div>
+
+        <div class="category-index-input-wrapper">
+            <input type="text" name="slug" value="@Model.FilterParams.Slug" class="form-control category-index-input category-index-slug-input" placeholder="جستجو بر اساس اسلاگ..." />
+        </div>
+
+        <button type="submit" class="btn btn-primary category-index-btn">
+            🔍 جستجو
+        </button>
+
+        <a asp-area="Admin" asp-controller="Category" asp-action="Add" class="btn btn-primary category-index-btn">
+            ➕ افزودن
+        </a>
+    </form>
+
+    <table class="category-index-table">
+        <thead>
+            <tr class="category-index-thead-tr">
+                <th class="category-index-th">#</th>
+                <th class="category-index-th">عنوان</th>
+                <th class="category-index-th">زیرگروه</th>
+                <th class="category-index-th">عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Categories)
+            {
+                <tr class="category-index-tr">
+                    <td class="category-index-td"><span class="badge">@(count++)</span></td>
+                    <td class="category-index-td category-index-item-title">@item.Title</td>
+                    <td class="category-index-td category-index-subcategories">
+                        @if (Model.AllCategory.Any(c => c.ParentId == item.Id))
+                        {
+                            <ul class="category-index-sub-list">
+                                @foreach (var subCategory in Model.AllCategory.Where(m => m.ParentId == item.Id))
+                                {
+                                    <li class="category-index-sub-item">
+                                        @subCategory.Title
+                                        <a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@subCategory.Id" class="btn btn-outline category-index-action-btn">ویرایش</a>
+                                        <a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@subCategory.Id" class="btn btn-danger category-index-action-btn">حذف</a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </td>
+                    <td class="category-index-td">
+                        <a asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline category-index-action-btn">ویرایش</a>
+                        <a asp-area="Admin" asp-controller="Category" asp-action="Add" asp-route-parentId="@item.Id" class="btn btn-outline category-index-action-btn">افزودن</a>
+                        <a asp-area="Admin" asp-controller="Category" asp-action="DeleteCategory" asp-route-categoryId="@item.Id" class="btn btn-danger category-index-action-btn">حذف</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <partial name="_Pagination" model="Model" />
+</div>

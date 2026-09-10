@@ -1,0 +1,20 @@
+﻿@using WriteFlow.CoreLayer.Services.MainPage
+@inject IMainPageServices MainPageServices
+
+@{ 
+    var stats = MainPageServices.GetSiteStats();
+}
+<div class="dashboard-grid">
+    <div class="stat-card">
+        <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 700;">کل کاربران</span>
+        <div class="stat-value">@stats.UserCount</div>
+    </div>
+    <div class="stat-card">
+        <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 700;">تعداد مقالات</span>
+        <div class="stat-value" style="color: var(--primary);">@stats.PostCount</div>
+    </div>
+    <div class="stat-card">
+        <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 700;">تعداد دسته بندی ها</span>
+        <div class="stat-value" style="color: #d97706;">@stats.CategoryCount</div>
+    </div>
+</div>

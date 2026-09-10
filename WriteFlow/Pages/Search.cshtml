@@ -1,0 +1,78 @@
+﻿@page "{handler?}"
+@using WriteFlow.CoreLayer.Services.Categories
+@using WriteFlow.CoreLayer.DTOs.Categories
+@using WriteFlow.CoreLayer.Utilities
+@inject ICategoryServices _categoryService;
+@model WriteFlow.Pages.SearchModel
+@{
+    CategoryDto category = null;
+    var search = "";
+    if (!string.IsNullOrWhiteSpace(Model.Filter.FilterParams.CategorySlug))
+    {
+        category = _categoryService.GetCategoryBy(Model.Filter.FilterParams.CategorySlug);
+        if (category != null)
+        {
+            search = category.Title;
+        }
+    }
+    else
+    {
+        search = Model.Filter.FilterParams.Title ?? "مقالات سایت";
+    }
+
+    ViewData["Title"] = search;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/search.css" />
+}
+
+<div class="search-layout">
+    <main class="search-main">
+        <div class="card search-header-card">
+            <div class="search-header-info">
+                <h1 class="search-header-title">
+                    نتایج جست‌وجو برای: @search
+                </h1>
+                <p class="search-header-count">
+                    تعداد نتایج: @Model.Filter.EntityCount
+                </p>
+            </div>
+
+            <form method="get" action="/Search" class="search-form">
+                <input type="text" name="q" class="form-control search-input" placeholder="جستجوی مجدد..." />
+                <button type="submit" class="btn btn-primary search-submit-btn">🔍</button>
+            </form>
+        </div>
+
+        <div id="SearchAjax">
+            <partial name="Shared/_SearchView" model="Model.Filter" />
+        </div>
+    </main>
+
+    <aside class="card search-sidebar" id="popular_posts"></aside>
+</div>
+
+@section Scripts {
+    <script>
+        function ajaxPagination(pageId) {
+            const params = new URLSearchParams(window.location.search);
+            let categorySlug = '';
+            let q = '';
+
+            if (params.has('categorySlug')) {
+                categorySlug = params.get("categorySlug");
+            }
+            if (params.has('q')) {
+                q = params.get("q");
+            }
+
+            $.ajax({
+                url: `/search/Pagination?pageId=${pageId}&q=${q}&categorySlug=${categorySlug}`,
+                type: "get"
+            }).done(function (data) {
+                $("#SearchAjax").html(data);
+            });
+        }
+    </script>
+}

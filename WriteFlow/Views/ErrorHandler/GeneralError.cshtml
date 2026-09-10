@@ -1,0 +1,27 @@
+﻿@{ 
+    ViewData["Title"] = "صفحه پیدا نشد"; 
+}
+<div class="card" style="max-width: 650px; margin: 4rem auto; padding: 4rem 2rem; text-align: center; border-top: 4px solid var(--primary);">
+    <div style="font-size: 7rem; font-weight: 900; color: var(--primary); line-height: 1; margin-bottom: 1rem; letter-spacing: -2px; text-shadow: 4px 4px 0px var(--bg-main, #fbf6ee);">
+        خطا!
+    </div>
+
+    <h1 style="font-size: 1.6rem; font-weight: 800; color: var(--dark); margin: 0 0 0.75rem 0;">
+        صفحه ی مورد نظر یافت نشد!.
+    </h1>
+
+    <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; max-width: 480px; margin: 0 auto 2.5rem auto;">
+         @ViewData["ErrorMessage"]
+    </p>
+
+    <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+        <a href="/" class="btn btn-primary" style="padding: 0.65rem 1.75rem; font-size: 0.875rem;">
+            بازگشت به صفحه اصلی
+        </a>
+
+        <button onclick="history.back()" class="btn btn-outline" style="padding: 0.65rem 1.5rem; font-size: 0.875rem;">
+            صفحه قبلی
+        </button>
+    </div>
+
+</div>

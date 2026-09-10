@@ -1,0 +1,151 @@
+﻿@page "{slug}"
+@model WriteFlow.Pages.ArticleModel
+@using WriteFlow.CoreLayer.Utilities
+@{
+    ViewData["Title"] = Model.Post.Title;
+    var CommentsCnt = Model.Comments.Count;
+    var siteUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+    var postUrl = $"{siteUrl}/Post/{Model.Post.Slug}";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/article.css" />
+}
+
+<div class="article-layout">
+
+    <main class="article-main">
+
+        <article class="card article-card-main">
+
+            <header class="article-header">
+                <h1 class="article-title">
+                    @Model.Post.Title
+                </h1>
+
+                <div class="article-meta-list">
+                    <div class="article-meta-item">
+                        <span>✍️ نویسنده:</span>
+                        <strong class="article-meta-strong">@Model.Post.UserFullName</strong>
+                    </div>
+                    <div class="article-meta-item">
+                        <span>تاریخ انتشار: </span>
+                        <strong class="article-meta-strong">@Model.Post.CreationDate.ToPersianDate()</strong>
+                    </div>
+                    <div class="article-meta-item">
+                        <span>📁 دسته‌بندی:</span>
+                        <a href="/Search?categorySlug=@Model.Post.Category.Slug" class="badge article-meta-badge">
+                            @Model.Post.Category.Title
+                        </a>
+                    </div>
+                    <div class="article-meta-item">
+                        <span>👁️ بازدید:</span>
+                        <strong class="article-meta-strong">@Model.Post.VisitCount</strong>
+                    </div>
+                    <div class="article-meta-item">
+                        <span>💬 نظرات:</span>
+                        <strong class="article-meta-strong">@CommentsCnt</strong>
+                    </div>
+                </div>
+            </header>
+
+            <div class="article-cover-wrapper">
+                <img src="@Directories.GetPostImage(Model.Post.ImageName)" alt="@Model.Post.Title" class="article-cover-img" />
+            </div>
+
+            <div class="article-body">
+                @Html.Raw(Model.Post.Description)
+            </div>
+        </article>
+
+        <section class="card article-section-card">
+            <h3 class="article-section-title-related">
+                📚 مقالات مرتبط
+            </h3>
+
+            <div class="article-related-grid">
+                @if (!Model.RelatedPost.Any())
+                {
+                    <a class="article-related-card">
+                        <div class="article-related-empty">
+                            <h4 class="article-related-empty-title">
+                                مطالب مرتبطی یافت نشد.
+                            </h4>
+                        </div>
+                    </a>
+                }
+                else
+                {
+                    @foreach (var relatedPost in Model.RelatedPost)
+                    {
+                        <a asp-page="Post" asp-route-slug="@relatedPost.Slug" class="article-related-card">
+                            <img src="@Directories.GetPostImage(relatedPost.ImageName)"
+                                 alt="@relatedPost.Title"
+                                 class="article-related-img" />
+
+                            <div class="article-related-body">
+                                <h4 class="article-related-title">
+                                    @relatedPost.Title
+                                </h4>
+
+                                @if (!string.IsNullOrEmpty(relatedPost.Description))
+                                {
+                                    <p class="article-related-desc">
+                                        @relatedPost.ShortDescription
+                                    </p>
+                                }
+                            </div>
+                        </a>
+                    }
+                }
+            </div>
+        </section>
+
+        <section class="card article-section-card">
+            <h3 class="article-section-title-comments">
+                💬 دیدگاه‌ها (@CommentsCnt)
+            </h3>
+
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <div class="article-auth-alert">
+                    🔒 برای ثبت نظر باید ابتدا <a href="/Authentication/login" class="article-auth-link">وارد حساب کاربری</a> خود شوید یا <a href="/Authentication/Register" class="article-auth-link">ثبت‌نام کنید</a>.
+                </div>
+            }
+            else
+            {
+                <form method="post" asp-page="Post" asp-route-slug="@Model.Post.Slug" class="article-comment-form">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" asp-for="PostId" value="@Model.Post.PostId" />
+
+                    <div class="form-group article-form-group">
+                        <textarea asp-for="TextComment" class="form-control article-comment-textarea" rows="4" placeholder="دیدگاه خود را در مورد این مقاله بنویسید..." required></textarea>
+                        <span asp-validation-for="TextComment" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary article-submit-btn">
+                        ارسال دیدگاه
+                    </button>
+                </form>
+            }
+
+            <div class="article-comments-list">
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="article-comment-item">
+                        <div class="article-comment-header">
+                            <strong class="article-comment-author">👤 @comment.UserFullName</strong>
+                            <span class="article-comment-date">🕒 @comment.CreationDate.ToPersianDate()</span>
+                        </div>
+                        <p class="article-comment-body">
+                            @comment.Text
+                        </p>
+                    </div>
+                }
+            </div>
+        </section>
+    </main>
+
+    <aside class="card article-sidebar" id="popular_posts"></aside>
+
+</div>

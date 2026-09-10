@@ -1,0 +1,49 @@
+﻿@page
+@model WriteFlow.Pages.Authentication.RegisterModel
+@{
+    Layout = "_AuthLayout";
+    ViewData["Title"] = "ثبت نام";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/auth/auth-register.css" />
+}
+
+<div class="auth-register-header">
+    <div class="brand-logo-badge auth-register-logo">W</div>
+    <h1 class="auth-register-title">ثبت نام</h1>
+    <p class="auth-register-subtitle">لطفاً مشخصات خود را وارد کنید</p>
+</div>
+
+<form method="post">
+    <div class="form-group">
+        <label class="form-label" asp-for="UserName">ایمیل</label>
+        <input asp-for="UserName" type="email" class="form-control" placeholder="name@example.com" />
+        <span asp-validation-for="UserName"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label" asp-for="FullName">نام و نام خانوادگی</label>
+        <input asp-for="FullName" type="text" class="form-control" placeholder="نام و نام خانوادگی" />
+        <span asp-validation-for="FullName"></span>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label auth-register-password-label" asp-for="Password">رمز عبور</label>
+        <input asp-for="Password" type="password" class="form-control" placeholder="••••••••" />
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block auth-register-submit-btn">ساخت حساب</button>
+</form>
+
+<div class="auth-register-footer">
+    قبلاً ثبت‌نام کردید؟ <a asp-page="Login" class="auth-register-login-link">وارد شوید</a>
+    <div class="auth-register-back-wrapper">
+        <a href="/" class="auth-register-back-link">← بازگشت به صفحه اصلی</a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
