@@ -5,15 +5,12 @@
 <header style="background: var(--surface); border-bottom: 1px solid var(--border); padding: 0.85rem 1.5rem;">
     <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
 
-        <!-- لوگو و منوی دسته‌بندی‌ها -->
         <div style="display: flex; align-items: center; gap: 1.5rem;">
             <a href="/" class="logo-brand">
                 <img src="~/images/Static/WriteFlowIcon.png" alt="Profile" class="logo-img" />
                 روان نویس
             </a>
 
-            <!-- منوی دسته‌بندی‌ها -->
-            <!-- منوی دسته‌بندی‌ها در هدر -->
             <nav style="display: flex; gap: 1.25rem; font-size: 0.875rem; align-items: center;">
                 @foreach (var category in Model.Where(p => p.ParentId == null))
                 {
@@ -41,15 +38,13 @@
             </nav>
         </div>
 
-        <!-- سرچ بار و پروفایل کاربر -->
         <div style="display: flex; align-items: center; gap: 1rem;">
-            <!-- سرچ بار هدر -->
+
             <form action="Search" method="get" style="display: flex; align-items: center; background: var(--bg-main); border: 1px solid var(--border); border-radius: var(--radius-sm, 6px); padding: 0.25rem 0.5rem;">
                 <input type="text" name="q" placeholder="جستجو در مقالات..." style="border: none; background: transparent; outline: none; padding: 0.25rem 0.5rem; font-size: 0.825rem; color: var(--dark);" />
                 <button type="submit" style="border: none; background: transparent; cursor: pointer; font-size: 0.85rem;">🔍</button>
             </form>
 
-            <!-- بخش پروفایل کاربر -->
             <div style="display: flex; align-items: center; gap: 0.5rem; border-right: 1px solid var(--border); padding-right: 1rem;">
                 <img src="~/images/Static/UserProfile.png" alt="Profile" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1px solid var(--primary);" />
                 <div style="display: flex; flex-direction: column; font-size: 0.775rem;">

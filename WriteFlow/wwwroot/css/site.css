@@ -117,10 +117,10 @@ a {
     border-radius: var(--radius-sm);
 }
 
-    .nav-link:hover, .nav-link.active {
-        color: var(--primary);
-        background-color: var(--primary-soft);
-    }
+.nav-link:hover, .nav-link.active {
+    color: var(--primary);
+    background-color: var(--primary-soft);
+}
 
 
 .btn {
@@ -143,21 +143,21 @@ a {
     color: #ffffff;
 }
 
-    .btn-primary:hover {
-        background-color: var(--primary-hover);
-        box-shadow: 0 4px 14px rgba(236, 91, 56, 0.3);
-        transform: translateY(-1px);
-    }
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 14px rgba(236, 91, 56, 0.3);
+    transform: translateY(-1px);
+}
 
 .btn-dark {
     background-color: var(--dark);
     color: #ffffff;
 }
 
-    .btn-dark:hover {
-        background-color: var(--dark-hover);
-        transform: translateY(-1px);
-    }
+.btn-dark:hover {
+    background-color: var(--dark-hover);
+    transform: translateY(-1px);
+}
 
 .btn-outline {
     background-color: transparent;
@@ -176,10 +176,10 @@ a {
     color: var(--danger);
 }
 
-    .btn-danger:hover {
-        background-color: var(--danger);
-        color: white;
-    }
+.btn-danger:hover {
+    background-color: var(--danger);
+    color: white;
+}
 
 .btn-block {
     width: 100%;
@@ -210,11 +210,11 @@ a {
     transition: var(--transition);
 }
 
-    .form-control:focus {
-        outline: none;
-        border-color: var(--primary);
-        box-shadow: 0 0 0 4px rgba(236, 91, 56, 0.12);
-    }
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(236, 91, 56, 0.12);
+}
 
 
 .main-container {
@@ -282,8 +282,6 @@ a {
     text-align: center;
 }
 
-/* dashboard style */
-/* Dashboard Specific Styles */
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -342,7 +340,6 @@ a {
     }
 
 
-/*ErrorStyle*/
 .error-wrapper {
     min-height: 100vh;
     display: flex;
@@ -430,9 +427,9 @@ a {
     cursor: pointer;
 }
 
-    .page-item:not(:last-child) {
-        border-left: 1px solid var(--border);
-    }
+.page-item:not(:last-child) {
+    border-left: 1px solid var(--border);
+}
 
 .page-link {
     display: flex;
@@ -447,10 +444,10 @@ a {
     cursor: pointer;
 }
 
-    .page-link:hover {
-        background-color: var(--bg-main, #f8f9fa);
-        color: var(--primary);
-    }
+.page-link:hover {
+    background-color: var(--bg-main, #f8f9fa);
+    color: var(--primary);
+}
 
 .page-item.active .page-link {
     background-color: var(--primary);
@@ -466,13 +463,11 @@ a {
     opacity: 0.6;
 }
 
-/* Container اصلی منوی افتادنی */
 .dropdown {
     position: relative !important;
     display: inline-block;
 }
 
-/* زیرمنوها (در حالت عادی مخفی و بدون اشغال فضا) */
 .dropdown-menu {
     display: none !important;
     position: absolute !important;
@@ -484,18 +479,18 @@ a {
     border: 1px solid var(--border, #e0e0e0) !important;
     border-radius: 8px !important;
     padding: 0.5rem 0 !important;
-    z-index: 9999 !important; /* قرارگیری روی تمام عناصر */
+    z-index: 9999 !important; 
     margin-top: 0.25rem !important;
     white-space: nowrap !important;
 }
 
-/* نمایش زیرمنو فقط هنگام هوور روی پدر */
+
 .dropdown:hover .dropdown-menu {
     display: flex !important;
     flex-direction: column !important;
 }
 
-/* استایل لینک‌های داخل زیرمنو */
+
 .dropdown-menu a {
     color: var(--dark, #333) !important;
     padding: 0.6rem 1rem !important;
@@ -511,7 +506,6 @@ a {
 }
 
 
-/* ===== Special Posts Cards ===== */
 .special-posts {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -525,8 +519,8 @@ a {
     border-radius: var(--radius-lg);
     overflow: hidden;
     text-decoration: none;
-    isolation: isolate; /* z-index ها داخل همین کادر می‌مونن */
-    background: var(--dark); /* قبل از لود شدن عکس، پس‌زمینه تیره باشه */
+    isolation: isolate;
+    background: var(--dark); 
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
 }
@@ -536,7 +530,6 @@ a {
     transform: translateY(-3px);
 }
 
-/* تصویر: absolute و کل کادر رو می‌پوشونه */
 .spcard__img {
     position: absolute;
     top: 0;
@@ -545,10 +538,9 @@ a {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    z-index: -2; /* پشت همه‌چیز */
+    z-index: -2;
 }
 
-/* گرادیانت: لایه مستقل، کل کادر */
 .spcard::after {
     content: "";
     position: absolute;
@@ -557,7 +549,6 @@ a {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.45) 35%, transparent 65%);
 }
 
-/* محتوا */
 .spcard__content {
     position: absolute;
     bottom: 0;
@@ -581,7 +572,6 @@ a {
     line-height: 1.5;
 }
 
-/* نسخه کوچک‌تر */
 .spcard--sm .spcard__content {
     padding: 1rem;
 }
@@ -592,7 +582,6 @@ a {
     margin: 0.4rem 0 0;
 }
 
-/* موبایل: تک‌ستونه */
 @media (max-width: 768px) {
     .special-posts {
         grid-template-columns: 1fr;
@@ -604,24 +593,23 @@ a {
 }
 
 
-/* کلاس برای لینکِ لوگو */
 .logo-brand {
     display: inline-flex;
-    align-items: center; /* تراز عمودی وسط */
-    gap: 0.5rem; /* فاصله بین عکس و متن */
+    align-items: center; 
+    gap: 0.5rem;
     font-weight: 800;
     font-size: 1.25rem;
     color: var(--dark);
     text-decoration: none;
 }
 
-/* کلاس برای تصویرِ لوگو */
+
 .logo-img {
     width: 36px;
     height: 36px;
     object-fit: cover;
     border: 1px solid var(--primary);
-    display: block; /* برای حذف فضای اضافه زیر عکس */
+    display: block; 
 }
 
 
