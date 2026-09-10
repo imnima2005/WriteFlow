@@ -464,3 +464,7 @@ bin/
 obj/
 .vs/
 .idea/
+
+
+/wwwroot/imaged/posts/*
+!/wwwroot/imaged/posts/.gitkeep

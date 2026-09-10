@@ -39,11 +39,13 @@ WriteFlow/
 - Cookie Authentication with persistent sessions (IsPersistent = true).
 - Claim-Based Authorization (NameIdentifier, Name, Role).
 - Role Hierarchy: Enums defining Admin, Writer, and User roles with area-level route protection (AdminControllerBase).
+![Authentication](./docs/assets/Management_2.gif)
 
 ### 📰 2. Content & Article Management
 - Rich-Text Content Creation: Integrated CKEditor 4 with dedicated secure asynchronous image uploading (/Upload/Article).
 - SEO & Routing: Automatic URL slugification (ToSlug()) for dynamic SEO-friendly URLs.
 - Article Discovery: Post visit tracker (visitCount), featured/special post flags (IsSpecial), and automated related articles recommendation engine.
+![Management](./docs/assets/Management_2.gif)
 
 ### 🗂️ 3. Hierarchical Category System
 - Recursive parent-child category tree.
